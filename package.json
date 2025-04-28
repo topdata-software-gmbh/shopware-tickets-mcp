@@ -1,6 +1,6 @@
 {
   "name": "@studiosolid/shopware-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A local Model Context Protocol (MCP) server for Shopware plugin development",
   "main": "dist/index.js",
   "repository": {
@@ -15,7 +15,7 @@
   "homepage": "https://github.com/dithom/shopware-mcp#readme",
   "type": "module",
   "bin": {
-    "shopware-mcp": "dist/index.js"
+    "shopware-mcp": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc && chmod 755 dist/index.js",
