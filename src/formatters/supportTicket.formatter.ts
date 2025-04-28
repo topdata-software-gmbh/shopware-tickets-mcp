@@ -9,8 +9,6 @@ const formatValue = (value: any, defaultValue = 'N/A'): string => {
 
 export default (ticketData: SupportTicketResponse) => {
   return `
-    Support Ticket Analysis Request:
-
     Ticket Information:
     - ID: ${formatValue(ticketData.id)}
     - Title: ${formatValue(ticketData.title)}
@@ -36,11 +34,7 @@ export default (ticketData: SupportTicketResponse) => {
     - Software Version: ${formatValue(ticketData.additionalInformation?.softwareVersion)}
     - Locale: ${formatValue(ticketData.additionalInformation?.locale)}
 
-    Customer Information:
-    - Company: ${formatValue(ticketData.creatorCompany?.name)}
-    - Contact: ${formatValue(ticketData.contact?.name)}
-    - Phone: ${formatValue(ticketData.contact?.phoneNumber)}
-    - Email: ${formatValue(ticketData.contact?.mails?.length > 0 ? ticketData.contact.mails.join(', ') : '')}
+    Customer information is removed to protect privacy.
 
     Ticket Details:
     - Assignee Prefix: ${formatValue(ticketData.assigneePrefix)}
