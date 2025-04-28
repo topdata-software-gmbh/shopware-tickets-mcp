@@ -13,12 +13,15 @@ A local Model Context Protocol (MCP) server for Shopware plugin development. Thi
 Note: I'm new to MCP development. I'm open to any suggestions and tips!
 
 ## Connect to server
+
+Add this in your MCP clients configuration:
+
 ```
 {
   "mcpServers": {
     "shopware-mcp": {
       "command": "npx",
-      "args": ["-y", "@studiosolid/shopware-mcp"],
+      "args": ["-y", "@dithom/shopware-mcp"],
       "env": {
         "SHOPWARE_ACCOUNT_EMAIL": "YOUR_SHOPWARE_ACCOUNT_EMAIL",
         "SHOPWARE_ACCOUNT_PASSWORD": "YOUR_SHOPWARE_ACCOUNT_PASSWORD"
