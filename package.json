@@ -19,8 +19,8 @@
   },
   "scripts": {
     "build": "tsc && chmod 755 dist/index.js",
-    "format": "prettier --write \"src/**/*.{ts}\"",
-    "format:check": "prettier --check \"src/**/*.{ts}\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
