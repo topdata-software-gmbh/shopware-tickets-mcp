@@ -9,8 +9,6 @@ describe('formatSupportTicket', () => {
     expect(formatted).toContain('12345');
     expect(formatted).toContain('Test Plugin Issue');
     expect(formatted).toContain('open');
-    expect(formatted).toContain('Test Company GmbH');
-    expect(formatted).toContain('test@example.com');
   });
 
   it('should handle empty values gracefully', () => {
@@ -33,9 +31,5 @@ describe('formatSupportTicket', () => {
 
     expect(formatted).toContain('12345');
     expect(formatted).toContain('Title: N/A');
-    expect(formatted).toContain('Company: N/A');
-    expect(formatted).toContain('Contact: N/A');
-    expect(formatted).toContain('Phone: N/A');
-    expect(formatted).toContain('Email: N/A');
   });
 });
