@@ -161,7 +161,7 @@ const getSupportTicket = async (ticketId: string): Promise<SupportTicketResponse
     throw new Error(`Failed to fetch support ticket: ${response.status} ${response.statusText}`);
   }
 
-  return await response.json();
+  return (await response.json()) as SupportTicketResponse;
 };
 
 const getProducer = async (token: string, userId: string): Promise<ProducerResponse> => {
@@ -180,7 +180,11 @@ const getProducer = async (token: string, userId: string): Promise<ProducerRespo
     );
   }
 
-  const data = await response.json();
+  const data = (await response.json()) as ProducerResponse[];
+
+  if (!data[0]) {
+    throw new Error('No producer found');
+  }
 
   return data[0];
 };
@@ -201,7 +205,7 @@ const login = async (): Promise<LoginResponse> => {
     throw new Error(`Shopware API: Failed to login: ${response.status} ${response.statusText}`);
   }
 
-  return await response.json();
+  return (await response.json()) as LoginResponse;
 };
 
 export { getProducer, getSupportTicket };
