@@ -1,5 +1,5 @@
 {
-  "name": "shopware-mcp",
+  "name": "@studiosolid/shopware-mcp",
   "version": "1.0.0",
   "description": "A local Model Context Protocol (MCP) server for Shopware plugin development",
   "main": "dist/index.js",
