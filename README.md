@@ -4,11 +4,11 @@ A local Model Context Protocol (MCP) server for Shopware plugin development. Thi
 
 ## Features
 
-✅ Support ticket information retrieval
-👷‍♂️ Planned: Environment setup based on support ticket information (cloning of Shopware and plugin repo in affected versions)
-👷‍♂️ Planned: Create Git bugfix branches
-👷‍♂️ Planned: Check code, run existing tests and interact with the browser via MCP to fix bugs
-👷‍♂️ Planned: Create and push commits and create PRs
+- ✅ Support ticket information retrieval
+- 👷‍♂️ Planned: Environment setup based on support ticket information (cloning of Shopware and plugin repo in affected versions)
+- 👷‍♂️ Planned: Create Git bugfix branches
+- 👷‍♂️ Planned: Check code, run existing tests and interact with the browser via MCP to fix bugs
+- 👷‍♂️ Planned: Create and push commits and create PRs
 
 Note: I'm new to MCP development. I'm open to any suggestions and tips!
 
@@ -30,3 +30,11 @@ Add this in your MCP clients configuration:
   }
 }
 ```
+
+Check it's connecting successfully. Then you can prompt something like:
+
+```
+Can you find information for support ticket ABCDE-123456?
+```
+
+The LLM should use the `get-support-ticket` tool then.
