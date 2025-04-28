@@ -5,6 +5,7 @@ A local Model Context Protocol (MCP) server for Shopware plugin development. Thi
 ## Features
 
 - ✅ Support ticket information retrieval
+- ✅ Detailed instructions on how to approach fixing a bug in a Shopware plugin
 - 👷‍♂️ Planned: Environment setup based on support ticket information (cloning of Shopware and plugin repo in affected versions)
 - 👷‍♂️ Planned: Create Git bugfix branches
 - 👷‍♂️ Planned: Check code, run existing tests and interact with the browser via MCP to fix bugs
