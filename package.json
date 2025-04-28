@@ -15,7 +15,7 @@
   "homepage": "https://github.com/dithom/shopware-mcp#readme",
   "type": "module",
   "bin": {
-    "shopware-mcp": "dist/index.js"
+    "shopware-mcp": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc && chmod 755 dist/index.js",
