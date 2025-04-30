@@ -1,20 +1,36 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import supportTicketTool from './supportTicket.tool.js';
-import instructionsTool from './instructions.tool.js';
+import checkEnvironmentTool from './checkEnvironment.tool.js';
+import getSupportTicketTool from './getSupportTicket.tool.js';
+import setupEnvironmentTool from './setupEnvironment.tool.js';
+import fixPluginProcessTool from './startPluginFix.tool.js';
 
 const registerTools = (server: McpServer) => {
   server.tool(
-    supportTicketTool.name,
-    supportTicketTool.description,
-    supportTicketTool.parameters,
-    supportTicketTool.handler
+    fixPluginProcessTool.name,
+    fixPluginProcessTool.description,
+    fixPluginProcessTool.paramsSchema,
+    fixPluginProcessTool.cb
   );
 
   server.tool(
-    instructionsTool.name,
-    instructionsTool.description,
-    instructionsTool.parameters,
-    instructionsTool.handler
+    getSupportTicketTool.name,
+    getSupportTicketTool.description,
+    getSupportTicketTool.paramsSchema,
+    getSupportTicketTool.cb
+  );
+
+  server.tool(
+    checkEnvironmentTool.name,
+    checkEnvironmentTool.description,
+    checkEnvironmentTool.paramsSchema,
+    checkEnvironmentTool.cb
+  );
+
+  server.tool(
+    setupEnvironmentTool.name,
+    setupEnvironmentTool.description,
+    setupEnvironmentTool.paramsSchema,
+    setupEnvironmentTool.cb
   );
 };
 
