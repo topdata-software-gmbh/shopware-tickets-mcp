@@ -1,8 +1,8 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import fixPluginProcessTool from './startPluginFix.tool.js';
-import getSupportTicketTool from './getSupportTicket.tool.js';
 import checkEnvironmentTool from './checkEnvironment.tool.js';
+import getSupportTicketTool from './getSupportTicket.tool.js';
 import setupEnvironmentTool from './setupEnvironment.tool.js';
+import fixPluginProcessTool from './startPluginFix.tool.js';
 
 const registerTools = (server: McpServer) => {
   server.tool(
