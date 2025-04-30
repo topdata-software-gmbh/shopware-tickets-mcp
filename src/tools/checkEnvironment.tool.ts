@@ -1,15 +1,22 @@
-import { z } from 'zod';
 import fs from 'fs';
+import { z } from 'zod';
 
 export default {
   name: 'check-environment',
-  description: 'Check if there is an existing local development environment available at the current project directory. This tool should not be used on its own! Only in context of a running bugfix process.',
+  description:
+    'Check if there is an existing local development environment available at the current project directory. This tool should not be used on its own! Only in context of a running bugfix process.',
   paramsSchema: {
-    shopwareVersion: z.string().describe('The required Shopware version to be installed and used to reproduce the bug in the format 1.0.0.0'),
-    pluginName: z.string().describe('The name of the plugin to fix. Usually in pascal case e.g. VendorMyPlugin.'),
+    shopwareVersion: z
+      .string()
+      .describe(
+        'The required Shopware version to be installed and used to reproduce the bug in the format 1.0.0.0'
+      ),
+    pluginName: z
+      .string()
+      .describe('The name of the plugin to fix. Usually in pascal case e.g. VendorMyPlugin.'),
     pluginVersion: z.string().describe('The affected plugin version to fix in the format 1.0.0.0.'),
   },
-  cb: (params: { shopwareVersion: string, pluginName: string, pluginVersion: string }) => {
+  cb: (params: { shopwareVersion: string; pluginName: string; pluginVersion: string }) => {
     const projectDirectory = process.env.PROJECT_DIRECTORY;
 
     if (!projectDirectory || typeof projectDirectory !== 'string') {
@@ -21,7 +28,7 @@ export default {
               There seems to be an issue with the PROJECT_DIRECTORY environment variable. Show the following message to the user before proceeding or retrying any steps:
 
               Please set the PROJECT_DIRECTORY environment variable to the absolute path of the project directory to check for a local development environment.
-            `
+            `,
           },
         ],
       };
@@ -29,24 +36,20 @@ export default {
 
     try {
       const hasBasicShopwareStructure =
-        (
-          fs.existsSync(`${projectDirectory}/composer.json`) &&
+        (fs.existsSync(`${projectDirectory}/composer.json`) &&
           fs.existsSync(`${projectDirectory}/vendor/shopware/core`) &&
           fs.existsSync(`${projectDirectory}/vendor/shopware/storefront`) &&
           fs.existsSync(`${projectDirectory}/vendor/shopware/administration`) &&
           fs.existsSync(`${projectDirectory}/custom/plugins`) &&
           fs.existsSync(`${projectDirectory}/custom/static-plugins`) &&
-          fs.existsSync(`${projectDirectory}/custom/apps`)
-        ) ||
-        (
-          fs.existsSync(`${projectDirectory}/shopware/composer.json`) &&
+          fs.existsSync(`${projectDirectory}/custom/apps`)) ||
+        (fs.existsSync(`${projectDirectory}/shopware/composer.json`) &&
           fs.existsSync(`${projectDirectory}/shopware/vendor/shopware/core`) &&
           fs.existsSync(`${projectDirectory}/shopware/vendor/shopware/storefront`) &&
           fs.existsSync(`${projectDirectory}/shopware/vendor/shopware/administration`) &&
           fs.existsSync(`${projectDirectory}/shopware/custom/plugins`) &&
           fs.existsSync(`${projectDirectory}/shopware/custom/static-plugins`) &&
-          fs.existsSync(`${projectDirectory}/shopware/custom/apps`)
-        );
+          fs.existsSync(`${projectDirectory}/shopware/custom/apps`));
 
       if (!hasBasicShopwareStructure) {
         return {
@@ -61,7 +64,7 @@ export default {
                 Show the following message to the user before proceeding with the bugfix process or retrying any steps:
 
                 No Shopware development environment detected. Do you want to setup a fitting local development environment?
-              `
+              `,
             },
           ],
         };
@@ -69,11 +72,14 @@ export default {
 
       const shopwareComposerJsonPaths = [
         `${projectDirectory}/composer.json`,
-        `${projectDirectory}/shopware/composer.json`
+        `${projectDirectory}/shopware/composer.json`,
       ];
       const shopwareComposerJsonPath = shopwareComposerJsonPaths.find(fs.existsSync);
       const shopwareComposerJson = fs.readFileSync(shopwareComposerJsonPath as string, 'utf8');
-      const shopwareVersion = JSON.parse(shopwareComposerJson).require['shopware/core'].replace('v', '');
+      const shopwareVersion = JSON.parse(shopwareComposerJson).require['shopware/core'].replace(
+        'v',
+        ''
+      );
 
       if (shopwareVersion !== params.shopwareVersion) {
         return {
@@ -86,7 +92,7 @@ export default {
                 Show the following message to the user before proceeding with the bugfix process or retrying any steps:
 
                 The Shopware version in the project directory is not the correct version ${params.shopwareVersion}.
-              `
+              `,
             },
           ],
         };
@@ -98,7 +104,7 @@ export default {
         `${projectDirectory}/custom/apps/${params.pluginName}/composer.json`,
         `${projectDirectory}/shopware/custom/plugins/${params.pluginName}/composer.json`,
         `${projectDirectory}/shopware/custom/static-plugins/${params.pluginName}/composer.json`,
-        `${projectDirectory}/shopware/custom/apps/${params.pluginName}/composer.json`
+        `${projectDirectory}/shopware/custom/apps/${params.pluginName}/composer.json`,
       ];
 
       const hasPlugin = pluginComposerJsonPaths.some(fs.existsSync);
@@ -119,7 +125,7 @@ export default {
                 Show the following message to the user before proceeding with the bugfix process or retrying any steps:
 
                 No plugin with the name ${params.pluginName} detected. Please move the plugin to the correct directory or provide a repository URL to the plugin.
-              `
+              `,
             },
           ],
         };
@@ -143,7 +149,7 @@ export default {
                 Show the following message to the user before proceeding with the bugfix process or retrying any steps:
 
                 The plugin ${params.pluginName} exists at the path "${pluginPath}" but is not the correct version ${params.pluginVersion} to fix the bug.
-              `
+              `,
             },
           ],
         };
@@ -162,10 +168,10 @@ export default {
               - The plugin root directory for the plugin ${params.pluginName} is located at the path "${pluginPath}".
 
               Now proceed with the next step of the bugfix process.
-            `
+            `,
           },
-        ]
-      }
+        ],
+      };
     } catch (error) {
       return {
         content: [
@@ -175,7 +181,7 @@ export default {
               An error occurred while looking for files in the project directory. Show the following message to the user before proceeding or retrying any steps:
 
               Could not read files in the project directory. Please set the PROJECT_DIRECTORY environment variable to the absolute path of the project directory to check for a local development environment.
-            `
+            `,
           },
         ],
       };

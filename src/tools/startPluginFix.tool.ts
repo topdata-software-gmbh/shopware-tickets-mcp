@@ -2,13 +2,17 @@ import { z } from 'zod';
 
 export default {
   name: 'start-plugin-fix',
-  description: 'Start the guided process to fix a Shopware plugin bug based on either a support ticket number (e.g., "Can you fix ABCDE-123456?") or a plugin bug description (e.g., "Can you fix the following bug in the plugin PluginName? Further bug description.")',
+  description:
+    'Start the guided process to fix a Shopware plugin bug based on either a support ticket number (e.g., "Can you fix ABCDE-123456?") or a plugin bug description (e.g., "Can you fix the following bug in the plugin PluginName? Further bug description.")',
   paramsSchema: {
-    ticketId: z.string().optional().describe('Optional: the support ticket ID (ABCDE-123456) to fix'),
+    ticketId: z
+      .string()
+      .optional()
+      .describe('Optional: the support ticket ID (ABCDE-123456) to fix'),
     pluginName: z.string().optional().describe('Optional: the name of the plugin to fix'),
     bugDescription: z.string().optional().describe('Optional: a description of the bug to fix'),
   },
-  cb: (params: { ticketId?: string, pluginName?: string, bugDescription?: string }) => {
+  cb: (params: { ticketId?: string; pluginName?: string; bugDescription?: string }) => {
     let text = `You are a senior PHP developer with deep knowledge in Symfony, Shopware 6 and the Shopware plugin system. You value effective code changes, maintainable architecture and readable code over quick and dirty fixes. You are about to fix a bug in a Shopware plugin.`;
 
     if (params.ticketId) {
@@ -62,7 +66,7 @@ export default {
           type: 'text' as const,
           text: text,
         },
-      ]
-    }
+      ],
+    };
   },
 };

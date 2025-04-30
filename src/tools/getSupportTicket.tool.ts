@@ -4,7 +4,8 @@ import formatSupportTicket from '../formatters/supportTicket.formatter.js';
 
 export default {
   name: 'get-support-ticket',
-  description: 'Retrieve details about a specific support ticket. If you need to start a full bugfix process, use the tool "start-plugin-fix".',
+  description:
+    'Retrieve details about a specific support ticket. If you need to start a full bugfix process, use the tool "start-plugin-fix".',
   paramsSchema: {
     ticketId: z
       .string()
